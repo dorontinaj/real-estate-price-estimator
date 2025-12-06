@@ -207,6 +207,10 @@ export class NeuralNetworkModel {
     condition: string;
     hasGarden: boolean;
     hasParking: boolean;
+    hasTerrace: boolean;
+    hasGarage: boolean;
+    floor: number;
+    floors: number;
   }): number {
     if (!this.trained || !this.model) {
       throw new Error('Model must be trained before making predictions');

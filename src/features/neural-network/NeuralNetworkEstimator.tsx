@@ -13,6 +13,7 @@ import { Progress } from '@/components/ui/progress';
 import { Brain, TrendingUp, Zap } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 import { NeuralNetworkModel } from '@/lib/neural-network-model';
+import { usePredictionStore } from '@/stores/prediction';
 
 const belgianCities = [
   'Brussels',
@@ -28,13 +29,25 @@ const belgianCities = [
 let modelInstance: NeuralNetworkModel | null = null;
 
 export function NeuralNetworkEstimator() {
-  const [surface, setSurface] = useState(100);
-  const [rooms, setRooms] = useState(3);
-  const [bathrooms, setBathrooms] = useState(1);
-  const [constructionYear, setConstructionYear] = useState(2000);
-  const [location, setLocation] = useState('Brussels');
-  const [hasGarden, setHasGarden] = useState(false);
-  const [hasParking, setHasParking] = useState(true);
+  const { propertyData } = usePredictionStore();
+
+  const [surface, setSurface] = useState(propertyData.surface || 100);
+  const [rooms, setRooms] = useState(propertyData.rooms || 3);
+  const [bathrooms, setBathrooms] = useState(propertyData.bathrooms || 1);
+  const [constructionYear, setConstructionYear] = useState(
+    propertyData.constructionYear || 2000
+  );
+  const [location, setLocation] = useState(propertyData.location || 'Brussels');
+  const [hasGarden, setHasGarden] = useState(propertyData.hasGarden || false);
+  const [hasParking, setHasParking] = useState(
+    propertyData.hasParking !== undefined ? propertyData.hasParking : true
+  );
+  const [hasTerrace, setHasTerrace] = useState(
+    propertyData.hasTerrace || false
+  );
+  const [hasGarage, setHasGarage] = useState(propertyData.hasGarage || false);
+  const [floor, setFloor] = useState(propertyData.floor || 0);
+  const [floors, setFloors] = useState(propertyData.floors || 1);
 
   const [prediction, setPrediction] = useState<number | null>(null);
   const [isTraining, setIsTraining] = useState(false);
@@ -83,6 +96,10 @@ export function NeuralNetworkEstimator() {
         condition: 'good',
         hasGarden,
         hasParking,
+        hasTerrace,
+        hasGarage,
+        floor,
+        floors,
       });
       setPrediction(price);
     } catch (error) {
@@ -96,6 +113,10 @@ export function NeuralNetworkEstimator() {
     location,
     hasGarden,
     hasParking,
+    hasTerrace,
+    hasGarage,
+    floor,
+    floors,
     isReady,
   ]);
 
@@ -106,13 +127,31 @@ export function NeuralNetworkEstimator() {
     }
   }, [updatePrediction, isReady]);
 
+  // Sync with property store when it changes
+  useEffect(() => {
+    if (propertyData.surface) setSurface(propertyData.surface);
+    if (propertyData.rooms) setRooms(propertyData.rooms);
+    if (propertyData.bathrooms) setBathrooms(propertyData.bathrooms);
+    if (propertyData.constructionYear)
+      setConstructionYear(propertyData.constructionYear);
+    if (propertyData.location) setLocation(propertyData.location);
+    setHasGarden(propertyData.hasGarden);
+    setHasParking(propertyData.hasParking);
+    if (propertyData.hasTerrace !== undefined)
+      setHasTerrace(propertyData.hasTerrace);
+    if (propertyData.hasGarage !== undefined)
+      setHasGarage(propertyData.hasGarage);
+    if (propertyData.floor !== undefined) setFloor(propertyData.floor);
+    if (propertyData.floors !== undefined) setFloors(propertyData.floors);
+  }, [propertyData]);
+
   if (isTraining) {
     return (
       <div className='space-y-6'>
-        <Card className='shadow-lg border-2 border-purple-300 bg-purple-100'>
+        <Card className='shadow-lg border-indigo-200 bg-indigo-50'>
           <CardHeader>
             <CardTitle className='flex items-center gap-2'>
-              <Brain className='h-6 w-6 text-purple-600 animate-pulse' />
+              <Brain className='h-6 w-6 text-indigo-600 animate-pulse' />
               Training Neural Network
             </CardTitle>
             <CardDescription>
@@ -132,7 +171,7 @@ export function NeuralNetworkEstimator() {
               </div>
               <Progress value={(trainingProgress / 30) * 100} className='h-3' />
             </div>
-            <div className='p-4 bg-white rounded-lg border border-purple-200'>
+            <div className='p-4 bg-white rounded-lg border border-indigo-200'>
               <p className='text-sm text-gray-700'>
                 🧠 Building 4-layer neural network with 64 → 32 → 16 → 1 neurons
                 <br />
@@ -152,15 +191,15 @@ export function NeuralNetworkEstimator() {
   return (
     <div className='space-y-6'>
       <div className='text-center'>
-        <div className='flex items-center justify-center gap-3 mb-4'>
-          <div className='p-3 bg-purple-600 rounded-xl shadow-lg'>
-            <Brain className='h-8 w-8 text-white' />
+        <div className='flex items-center justify-center gap-2 sm:gap-3 mb-4'>
+          <div className='p-2 sm:p-3 bg-indigo-600 rounded-xl shadow-lg'>
+            <Brain className='h-6 w-6 sm:h-8 sm:w-8 text-white' />
           </div>
           <div className='text-left'>
-            <h1 className='text-3xl font-bold text-gray-900'>
+            <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-gray-900'>
               Neural Network Estimator
             </h1>
-            <p className='text-sm text-gray-600'>
+            <p className='text-xs sm:text-sm text-gray-600'>
               Deep learning with TensorFlow.js
             </p>
           </div>
@@ -168,25 +207,25 @@ export function NeuralNetworkEstimator() {
         <div className='flex justify-center gap-2 flex-wrap'>
           <Badge
             variant='secondary'
-            className='bg-purple-200 text-purple-900 border-2 border-purple-400'
+            className='bg-indigo-100 text-indigo-800 border border-indigo-300'
           >
             TensorFlow.js
           </Badge>
           <Badge
             variant='secondary'
-            className='bg-pink-200 text-pink-900 border-2 border-pink-400'
+            className='bg-slate-100 text-slate-800 border border-slate-300'
           >
             4-Layer Network
           </Badge>
           <Badge
             variant='secondary'
-            className='bg-blue-200 text-blue-900 border-2 border-blue-400'
+            className='bg-teal-100 text-teal-800 border border-teal-300'
           >
             Live Prediction
           </Badge>
           <Badge
             variant='secondary'
-            className='bg-green-200 text-green-900 border-2 border-green-400'
+            className='bg-slate-100 text-slate-800 border border-slate-300'
           >
             Optimized Training
           </Badge>
@@ -195,8 +234,8 @@ export function NeuralNetworkEstimator() {
 
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
         {/* Interactive Sliders */}
-        <Card className='shadow-lg border-2 border-purple-200'>
-          <CardHeader className='bg-purple-100 border-b-2 border-purple-200'>
+        <Card className='shadow-lg border-indigo-200'>
+          <CardHeader className='bg-indigo-50 border-b border-indigo-200'>
             <CardTitle>Property Features</CardTitle>
             <CardDescription>
               Adjust sliders to see live price predictions
@@ -209,7 +248,7 @@ export function NeuralNetworkEstimator() {
                 <Label className='text-sm font-medium text-gray-700'>
                   Surface Area
                 </Label>
-                <span className='text-sm font-semibold text-purple-600'>
+                <span className='text-sm font-semibold text-indigo-600'>
                   {surface} m²
                 </span>
               </div>
@@ -229,7 +268,7 @@ export function NeuralNetworkEstimator() {
                 <Label className='text-sm font-medium text-gray-700'>
                   Number of Rooms
                 </Label>
-                <span className='text-sm font-semibold text-purple-600'>
+                <span className='text-sm font-semibold text-indigo-600'>
                   {rooms}
                 </span>
               </div>
@@ -249,7 +288,7 @@ export function NeuralNetworkEstimator() {
                 <Label className='text-sm font-medium text-gray-700'>
                   Bathrooms
                 </Label>
-                <span className='text-sm font-semibold text-purple-600'>
+                <span className='text-sm font-semibold text-indigo-600'>
                   {bathrooms}
                 </span>
               </div>
@@ -269,7 +308,7 @@ export function NeuralNetworkEstimator() {
                 <Label className='text-sm font-medium text-gray-700'>
                   Construction Year
                 </Label>
-                <span className='text-sm font-semibold text-purple-600'>
+                <span className='text-sm font-semibold text-indigo-600'>
                   {constructionYear}
                 </span>
               </div>
@@ -295,8 +334,8 @@ export function NeuralNetworkEstimator() {
                     onClick={() => setLocation(city)}
                     className={`px-3 py-2 text-xs rounded-lg border transition-all ${
                       location === city
-                        ? 'bg-purple-600 text-white border-purple-600 shadow-md'
-                        : 'bg-white text-gray-700 border-gray-300 hover:border-purple-400'
+                        ? 'bg-indigo-600 text-white border-indigo-600 shadow-md'
+                        : 'bg-white text-gray-700 border-gray-300 hover:border-indigo-400'
                     }`}
                   >
                     {city}
@@ -312,7 +351,7 @@ export function NeuralNetworkEstimator() {
                   type='checkbox'
                   checked={hasGarden}
                   onChange={(e) => setHasGarden(e.target.checked)}
-                  className='rounded border-gray-300 text-purple-600 focus:ring-purple-500'
+                  className='rounded border-2 border-slate-300 text-indigo-600 focus:ring-indigo-500 focus:ring-2 w-4 h-4 accent-indigo-600'
                 />
                 <span className='text-sm text-gray-700 group-hover:text-gray-900'>
                   Has Garden
@@ -323,7 +362,7 @@ export function NeuralNetworkEstimator() {
                   type='checkbox'
                   checked={hasParking}
                   onChange={(e) => setHasParking(e.target.checked)}
-                  className='rounded border-gray-300 text-purple-600 focus:ring-purple-500'
+                  className='rounded border-2 border-slate-300 text-indigo-600 focus:ring-indigo-500 focus:ring-2 w-4 h-4 accent-indigo-600'
                 />
                 <span className='text-sm text-gray-700 group-hover:text-gray-900'>
                   Has Parking
@@ -335,23 +374,23 @@ export function NeuralNetworkEstimator() {
 
         {/* Live Prediction Display */}
         <div className='space-y-6'>
-          <Card className='shadow-lg border-2 border-purple-300 bg-purple-100'>
+          <Card className='shadow-lg border-indigo-200 bg-gradient-to-br from-indigo-50 to-slate-50'>
             <CardHeader>
-              <CardTitle className='flex items-center gap-2 text-purple-900'>
+              <CardTitle className='flex items-center gap-2 text-indigo-900'>
                 <TrendingUp className='h-5 w-5' />
                 Neural Network Prediction
               </CardTitle>
-              <CardDescription className='text-purple-800'>
+              <CardDescription className='text-indigo-800'>
                 Live updated as you adjust parameters
               </CardDescription>
             </CardHeader>
             <CardContent>
               {prediction && (
                 <div className='text-center'>
-                  <div className='text-5xl font-bold text-purple-900 mb-3 animate-pulse'>
+                  <div className='text-5xl font-bold text-indigo-900 mb-3 animate-pulse'>
                     {formatCurrency(prediction)}
                   </div>
-                  <div className='flex items-center justify-center gap-2 text-sm text-purple-800'>
+                  <div className='flex items-center justify-center gap-2 text-sm text-indigo-800'>
                     <Zap className='h-4 w-4' />
                     <span>Real-time deep learning inference</span>
                   </div>
@@ -371,7 +410,7 @@ export function NeuralNetworkEstimator() {
                   <div className='w-20 text-xs font-medium text-gray-700'>
                     Input
                   </div>
-                  <div className='flex-1 bg-blue-500 h-8 rounded flex items-center justify-center text-white text-xs font-semibold shadow-md'>
+                  <div className='flex-1 bg-slate-600 h-8 rounded flex items-center justify-center text-white text-xs font-semibold shadow-md'>
                     9 features
                   </div>
                 </div>
@@ -379,7 +418,7 @@ export function NeuralNetworkEstimator() {
                   <div className='w-20 text-xs font-medium text-gray-700'>
                     Layer 1
                   </div>
-                  <div className='flex-1 bg-purple-500 h-10 rounded flex items-center justify-center text-white text-xs font-semibold shadow-md'>
+                  <div className='flex-1 bg-indigo-600 h-10 rounded flex items-center justify-center text-white text-xs font-semibold shadow-md'>
                     64 neurons + ReLU + Dropout
                   </div>
                 </div>
@@ -387,7 +426,7 @@ export function NeuralNetworkEstimator() {
                   <div className='w-20 text-xs font-medium text-gray-700'>
                     Layer 2
                   </div>
-                  <div className='flex-1 bg-pink-500 h-9 rounded flex items-center justify-center text-white text-xs font-semibold shadow-md'>
+                  <div className='flex-1 bg-indigo-500 h-9 rounded flex items-center justify-center text-white text-xs font-semibold shadow-md'>
                     32 neurons + ReLU + Dropout
                   </div>
                 </div>
@@ -395,7 +434,7 @@ export function NeuralNetworkEstimator() {
                   <div className='w-20 text-xs font-medium text-gray-700'>
                     Layer 3
                   </div>
-                  <div className='flex-1 bg-orange-500 h-8 rounded flex items-center justify-center text-white text-xs font-semibold shadow-md'>
+                  <div className='flex-1 bg-indigo-400 h-8 rounded flex items-center justify-center text-white text-xs font-semibold shadow-md'>
                     16 neurons + ReLU
                   </div>
                 </div>
@@ -403,7 +442,7 @@ export function NeuralNetworkEstimator() {
                   <div className='w-20 text-xs font-medium text-gray-700'>
                     Output
                   </div>
-                  <div className='flex-1 bg-green-500 h-7 rounded flex items-center justify-center text-white text-xs font-semibold shadow-md'>
+                  <div className='flex-1 bg-teal-600 h-7 rounded flex items-center justify-center text-white text-xs font-semibold shadow-md'>
                     1 neuron (price)
                   </div>
                 </div>
@@ -411,7 +450,7 @@ export function NeuralNetworkEstimator() {
             </CardContent>
           </Card>
 
-          <Card className='shadow-lg border-2 border-blue-300 bg-blue-100'>
+          <Card className='shadow-lg border-slate-200 bg-slate-50'>
             <CardHeader>
               <CardTitle className='text-base'>Why Neural Networks?</CardTitle>
             </CardHeader>

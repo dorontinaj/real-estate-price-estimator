@@ -49,21 +49,20 @@ export function AlgorithmsPage() {
     return (
       <div className='space-y-6'>
         <div className='text-center'>
-          <div className='flex items-center justify-center gap-3 mb-4'>
-            <div className='p-3 bg-green-600 rounded-xl shadow-lg'>
-              <BarChart3 className='h-8 w-8 text-white' />
+          <div className='flex items-center justify-center gap-2 sm:gap-3 mb-4'>
+            <div className='p-2 sm:p-3 bg-green-600 rounded-xl shadow-lg'>
+              <BarChart3 className='h-6 w-6 sm:h-8 sm:w-8 text-white' />
             </div>
             <div className='text-left'>
-              <h1 className='text-3xl font-bold text-gray-900'>
+              <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-gray-900'>
                 Algorithm Comparison
               </h1>
-              <p className='text-sm text-gray-600'>
+              <p className='text-xs sm:text-sm text-gray-600'>
                 Performance analysis of ML models
               </p>
             </div>
           </div>
-        </div>
-
+        </div>{' '}
         <Card className='shadow-lg'>
           <CardHeader>
             <CardTitle className='flex items-center gap-2'>
@@ -86,7 +85,6 @@ export function AlgorithmsPage() {
             </div>
           </CardContent>
         </Card>
-
         <AlgorithmCharacteristics />
       </div>
     );
@@ -127,9 +125,9 @@ export function AlgorithmsPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-            <div className='text-center p-4 bg-white rounded-lg shadow-sm'>
-              <div className='text-2xl font-bold text-blue-600'>
+          <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
+            <div className='text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm'>
+              <div className='text-xl sm:text-2xl font-bold text-blue-600'>
                 {formatCurrency(Math.round(avgPrice))}
               </div>
               <div className='text-sm text-blue-800 mt-1'>

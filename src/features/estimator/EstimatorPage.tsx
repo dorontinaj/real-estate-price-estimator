@@ -46,7 +46,10 @@ export function EstimatorPage() {
   }
 
   const runPrediction = async () => {
-    if (!modelInstance) return;
+    if (!modelInstance) {
+      console.error('Model not initialized yet');
+      return;
+    }
 
     setLoading(true);
 
@@ -123,15 +126,15 @@ export function EstimatorPage() {
   return (
     <div className='space-y-8'>
       <div className='text-center'>
-        <div className='flex items-center justify-center gap-3 mb-4'>
-          <div className='p-3 bg-blue-600 rounded-xl shadow-lg'>
-            <Calculator className='h-8 w-8 text-white' />
+        <div className='flex items-center justify-center gap-2 sm:gap-3 mb-4'>
+          <div className='p-2 sm:p-3 bg-blue-600 rounded-xl shadow-lg'>
+            <Calculator className='h-6 w-6 sm:h-8 sm:w-8 text-white' />
           </div>
           <div className='text-left'>
-            <h1 className='text-3xl font-bold text-gray-900'>
+            <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-gray-900'>
               Property Price Estimator
             </h1>
-            <p className='text-sm text-gray-600'>
+            <p className='text-xs sm:text-sm text-gray-600'>
               ML-powered Belgian real estate valuation
             </p>
           </div>
@@ -184,8 +187,8 @@ export function EstimatorPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className='grid grid-cols-2 md:grid-cols-4 gap-4 text-sm'>
-              <div className='p-3 bg-white rounded-lg shadow-sm'>
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 text-xs sm:text-sm'>
+              <div className='p-2 sm:p-3 bg-white rounded-lg shadow-sm'>
                 <div className='font-semibold text-gray-700'>
                   Location Impact
                 </div>

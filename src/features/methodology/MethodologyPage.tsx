@@ -11,13 +11,15 @@ export function MethodologyPage() {
   return (
     <div className='space-y-8'>
       <div className='text-center'>
-        <div className='flex items-center justify-center gap-3 mb-4'>
-          <div className='p-3 bg-indigo-600 rounded-xl shadow-lg'>
-            <Info className='h-8 w-8 text-white' />
+        <div className='flex items-center justify-center gap-2 sm:gap-3 mb-4'>
+          <div className='p-2 sm:p-3 bg-indigo-600 rounded-xl shadow-lg'>
+            <Info className='h-6 w-6 sm:h-8 sm:w-8 text-white' />
           </div>
           <div className='text-left'>
-            <h1 className='text-3xl font-bold text-gray-900'>Methodology</h1>
-            <p className='text-sm text-gray-600'>
+            <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-gray-900'>
+              Methodology
+            </h1>
+            <p className='text-xs sm:text-sm text-gray-600'>
               Understanding our ML approach
             </p>
           </div>
@@ -42,21 +44,29 @@ export function MethodologyPage() {
             accurate property valuations based on historical market data and key
             property characteristics.
           </p>
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-3'>
-            <div className='p-3 bg-white rounded-lg shadow-sm'>
-              <div className='text-xl font-bold text-blue-600'>2,500+</div>
+          <div className='grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3'>
+            <div className='p-2 sm:p-3 bg-white rounded-lg shadow-sm'>
+              <div className='text-lg sm:text-xl font-bold text-blue-600'>
+                2,500+
+              </div>
               <div className='text-xs text-gray-600'>Training Samples</div>
             </div>
-            <div className='p-3 bg-white rounded-lg shadow-sm'>
-              <div className='text-xl font-bold text-green-600'>5</div>
+            <div className='p-2 sm:p-3 bg-white rounded-lg shadow-sm'>
+              <div className='text-lg sm:text-xl font-bold text-green-600'>
+                5
+              </div>
               <div className='text-xs text-gray-600'>ML Algorithms</div>
             </div>
-            <div className='p-3 bg-white rounded-lg shadow-sm'>
-              <div className='text-xl font-bold text-purple-600'>14</div>
+            <div className='p-2 sm:p-3 bg-white rounded-lg shadow-sm'>
+              <div className='text-lg sm:text-xl font-bold text-purple-600'>
+                14
+              </div>
               <div className='text-xs text-gray-600'>Belgian Cities</div>
             </div>
-            <div className='p-3 bg-white rounded-lg shadow-sm'>
-              <div className='text-xl font-bold text-orange-600'>9</div>
+            <div className='p-2 sm:p-3 bg-white rounded-lg shadow-sm'>
+              <div className='text-lg sm:text-xl font-bold text-orange-600'>
+                9
+              </div>
               <div className='text-xs text-gray-600'>Features</div>
             </div>
           </div>

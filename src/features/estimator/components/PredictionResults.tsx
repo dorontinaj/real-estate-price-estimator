@@ -86,10 +86,10 @@ export function PredictionResults({
         </CardHeader>
         <CardContent>
           <div className='text-center'>
-            <div className='text-5xl font-bold text-green-700 mb-3'>
+            <div className='text-3xl sm:text-4xl md:text-5xl font-bold text-green-700 mb-3'>
               {formatCurrency(avgPrice)}
             </div>
-            <div className='flex items-center justify-center gap-6 text-sm text-green-700'>
+            <div className='flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-green-700'>
               <div className='flex items-center gap-2'>
                 <Target className='h-4 w-4' />
                 <span>

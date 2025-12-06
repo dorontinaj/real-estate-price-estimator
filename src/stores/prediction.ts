@@ -10,6 +10,10 @@ export interface PropertyData {
   condition: string;
   hasGarden: boolean;
   hasParking: boolean;
+  hasTerrace?: boolean;
+  hasGarage?: boolean;
+  floor?: number;
+  floors?: number;
 }
 
 export interface PredictionResult {
@@ -39,6 +43,10 @@ const initialPropertyData: PropertyData = {
   condition: '',
   hasGarden: false,
   hasParking: false,
+  hasTerrace: false,
+  hasGarage: false,
+  floor: 0,
+  floors: 1,
 };
 
 export const usePredictionStore = create<PredictionStore>((set) => ({

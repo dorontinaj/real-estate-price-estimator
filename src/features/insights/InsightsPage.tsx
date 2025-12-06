@@ -41,15 +41,15 @@ export function InsightsPage() {
   return (
     <div className='space-y-8'>
       <div className='text-center'>
-        <div className='flex items-center justify-center gap-3 mb-4'>
-          <div className='p-3 bg-purple-600 rounded-xl shadow-lg'>
-            <TrendingUp className='h-8 w-8 text-white' />
+        <div className='flex items-center justify-center gap-2 sm:gap-3 mb-4'>
+          <div className='p-2 sm:p-3 bg-purple-600 rounded-xl shadow-lg'>
+            <TrendingUp className='h-6 w-6 sm:h-8 sm:w-8 text-white' />
           </div>
           <div className='text-left'>
-            <h1 className='text-3xl font-bold text-gray-900'>
+            <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-gray-900'>
               Market Insights
             </h1>
-            <p className='text-sm text-gray-600'>
+            <p className='text-xs sm:text-sm text-gray-600'>
               Belgian real estate market analysis
             </p>
           </div>
@@ -67,24 +67,38 @@ export function InsightsPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
-            <div className='text-center p-4 bg-white rounded-lg shadow-sm'>
-              <div className='text-2xl font-bold text-blue-600'>€385K</div>
-              <div className='text-sm text-blue-800 mt-1'>Average Price</div>
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4'>
+            <div className='text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm'>
+              <div className='text-lg sm:text-2xl font-bold text-blue-600'>
+                €385K
+              </div>
+              <div className='text-xs sm:text-sm text-blue-800 mt-1'>
+                Average Price
+              </div>
             </div>
-            <div className='text-center p-4 bg-white rounded-lg shadow-sm'>
-              <div className='text-2xl font-bold text-green-600'>119m²</div>
-              <div className='text-sm text-green-800 mt-1'>Average Size</div>
+            <div className='text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm'>
+              <div className='text-lg sm:text-2xl font-bold text-green-600'>
+                119m²
+              </div>
+              <div className='text-xs sm:text-sm text-green-800 mt-1'>
+                Average Size
+              </div>
             </div>
-            <div className='text-center p-4 bg-white rounded-lg shadow-sm'>
-              <div className='text-2xl font-bold text-purple-600'>2,500</div>
-              <div className='text-sm text-purple-800 mt-1'>
+            <div className='text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm'>
+              <div className='text-lg sm:text-2xl font-bold text-purple-600'>
+                2,500
+              </div>
+              <div className='text-xs sm:text-sm text-purple-800 mt-1'>
                 Properties Analyzed
               </div>
             </div>
-            <div className='text-center p-4 bg-white rounded-lg shadow-sm'>
-              <div className='text-2xl font-bold text-orange-600'>14</div>
-              <div className='text-sm text-orange-800 mt-1'>Cities Covered</div>
+            <div className='text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm'>
+              <div className='text-lg sm:text-2xl font-bold text-orange-600'>
+                14
+              </div>
+              <div className='text-xs sm:text-sm text-orange-800 mt-1'>
+                Cities Covered
+              </div>
             </div>
           </div>
         </CardContent>
@@ -103,12 +117,15 @@ export function InsightsPage() {
         <CardContent>
           <div className='space-y-4'>
             {priceByCity.map((item, index) => (
-              <div key={index} className='flex items-center gap-4'>
-                <div className='w-24 text-sm font-medium text-gray-700'>
+              <div
+                key={index}
+                className='flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4'
+              >
+                <div className='w-full sm:w-24 text-xs sm:text-sm font-medium text-gray-700'>
                   {item.city}
                 </div>
                 <div className='flex-1'>
-                  <div className='flex items-center gap-3 mb-1'>
+                  <div className='flex items-center gap-2 sm:gap-3 mb-1'>
                     <div className='flex-1 bg-gray-200 rounded-full h-7 overflow-hidden'>
                       <div
                         className='bg-gradient-to-r from-blue-500 to-blue-600 h-full rounded-full flex items-center justify-end pr-2'
