@@ -72,8 +72,8 @@ export function PropertyForm({
     isNumericDataValid;
 
   return (
-    <Card className='shadow-lg border-gray-200'>
-      <CardHeader className='bg-blue-100 border-b-2 border-blue-200'>
+    <Card className='shadow-lg border-border'>
+      <CardHeader className='bg-primary/10 dark:bg-primary/20 border-b-2 border-primary/20'>
         <CardTitle>Property Details</CardTitle>
         <CardDescription>
           Enter property characteristics for price estimation
@@ -83,9 +83,9 @@ export function PropertyForm({
         <div>
           <Label
             htmlFor='propertyType'
-            className='text-sm font-medium text-gray-700'
+            className='text-sm font-medium text-foreground'
           >
-            Property Type <span className='text-red-500'>*</span>
+            Property Type <span className='text-red-500 dark:text-red-400'>*</span>
           </Label>
           <Select
             onValueChange={(value) => setPropertyData({ propertyType: value })}
@@ -107,9 +107,9 @@ export function PropertyForm({
         <div>
           <Label
             htmlFor='location'
-            className='text-sm font-medium text-gray-700'
+            className='text-sm font-medium text-foreground'
           >
-            Location <span className='text-red-500'>*</span>
+            Location <span className='text-red-500 dark:text-red-400'>*</span>
           </Label>
           <Select
             onValueChange={(value) => setPropertyData({ location: value })}
@@ -123,7 +123,7 @@ export function PropertyForm({
                 <SelectItem key={city.name} value={city.name}>
                   <span className='flex items-center justify-between w-full'>
                     <span>{city.name}</span>
-                    <span className='text-xs text-gray-500 ml-2'>
+                    <span className='text-xs text-muted-foreground ml-2'>
                       {city.postalCode}
                     </span>
                   </span>
@@ -137,7 +137,7 @@ export function PropertyForm({
           <div>
             <Label
               htmlFor='surface'
-              className='text-sm font-medium text-gray-700'
+              className='text-sm font-medium text-foreground'
             >
               Surface Area
             </Label>
@@ -159,12 +159,12 @@ export function PropertyForm({
                     : ''
                 }`}
               />
-              <span className='absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500 pointer-events-none'>
+              <span className='absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none'>
                 m²
               </span>
             </div>
             {propertyData.surface > 0 && !isSurfaceValid && (
-              <p className='text-xs text-red-600 mt-1'>
+              <p className='text-xs text-red-600 dark:text-red-400 mt-1'>
                 Surface area must be between 20 and 1,000 m²
               </p>
             )}
@@ -172,7 +172,7 @@ export function PropertyForm({
           <div>
             <Label
               htmlFor='constructionYear'
-              className='text-sm font-medium text-gray-700'
+              className='text-sm font-medium text-foreground'
             >
               Construction Year
             </Label>
@@ -194,7 +194,7 @@ export function PropertyForm({
               }`}
             />
             {propertyData.constructionYear > 0 && !isConstructionYearValid && (
-              <p className='text-xs text-red-600 mt-1'>
+              <p className='text-xs text-red-600 dark:text-red-400 mt-1'>
                 Year must be between 1800 and {new Date().getFullYear()}
               </p>
             )}
@@ -411,10 +411,10 @@ export function PropertyForm({
         ) : null}
 
         {!canPredict && (
-          <Alert className='border-blue-200 bg-blue-50'>
-            <Info className='h-4 w-4 text-blue-600' />
-            <AlertDescription className='text-sm text-gray-700'>
-              <span className='font-semibold text-blue-900'>
+          <Alert className='border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/50'>
+            <Info className='h-4 w-4 text-blue-600 dark:text-blue-400' />
+            <AlertDescription className='text-sm text-foreground'>
+              <span className='font-semibold text-blue-900 dark:text-blue-300'>
                 Fill in all required fields to enable Quick Estimate
               </span>
               <br />
@@ -426,10 +426,10 @@ export function PropertyForm({
         )}
 
         {canPredict && !isLoading && (
-          <Alert className='border-green-200 bg-gradient-to-r from-green-50 to-emerald-50'>
-            <Sparkles className='h-4 w-4 text-green-600' />
-            <AlertDescription className='text-sm text-gray-700'>
-              <span className='font-semibold text-green-900'>
+          <Alert className='border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 dark:border-green-800 dark:from-green-950/50 dark:to-emerald-950/50'>
+            <Sparkles className='h-4 w-4 text-green-600 dark:text-green-400' />
+            <AlertDescription className='text-sm text-foreground'>
+              <span className='font-semibold text-green-900 dark:text-green-300'>
                 Ready to estimate!
               </span>{' '}
               Click <span className='font-semibold'>Quick Estimate</span> to see

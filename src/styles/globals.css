@@ -1,34 +1,180 @@
 @import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* 
+  Modern Professional Blue Color System
+  - Primary: Clean blue (#3B82F6 family) - trustworthy, professional
+  - Neutrals: Slate-based for depth and sophistication
+  - Accent: Teal for success states and results
+*/
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 221.2 83.2% 53.3%;
-  --radius: 0.5rem;
+  /* Core surfaces - clean white with subtle warmth */
+  --background: oklch(0.995 0.002 250);
+  --foreground: oklch(0.15 0.02 250);
+  
+  /* Cards - pure white for contrast */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 250);
+  
+  /* Popovers */
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 250);
+  
+  /* Primary - Professional Blue */
+  --primary: oklch(0.55 0.18 250);
+  --primary-foreground: oklch(0.99 0 0);
+  
+  /* Secondary - Light blue-gray */
+  --secondary: oklch(0.96 0.01 250);
+  --secondary-foreground: oklch(0.25 0.02 250);
+  
+  /* Muted - Subtle slate */
+  --muted: oklch(0.96 0.008 250);
+  --muted-foreground: oklch(0.45 0.02 250);
+  
+  /* Accent - Teal for success/results */
+  --accent: oklch(0.75 0.12 180);
+  --accent-foreground: oklch(0.2 0.04 180);
+  
+  /* Destructive */
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  
+  /* Borders & Inputs */
+  --border: oklch(0.90 0.01 250);
+  --input: oklch(0.90 0.01 250);
+  --ring: oklch(0.55 0.18 250);
+  
+  /* Charts - Blue monochromatic with teal accent */
+  --chart-1: oklch(0.55 0.18 250);
+  --chart-2: oklch(0.65 0.14 250);
+  --chart-3: oklch(0.75 0.10 250);
+  --chart-4: oklch(0.70 0.12 180);
+  --chart-5: oklch(0.45 0.16 250);
+  
+  --radius: 0.625rem;
+  
+  /* Sidebar */
+  --sidebar: oklch(0.99 0.002 250);
+  --sidebar-foreground: oklch(0.15 0.02 250);
+  --sidebar-primary: oklch(0.55 0.18 250);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.96 0.01 250);
+  --sidebar-accent-foreground: oklch(0.25 0.02 250);
+  --sidebar-border: oklch(0.90 0.01 250);
+  --sidebar-ring: oklch(0.55 0.18 250);
 }
 
-* {
-  border-color: hsl(var(--border));
+.dark {
+  /* 
+    Modern Premium Dark Mode - Inspired by Linear/Vercel
+    Lighter slate backgrounds with rich blue accents
+  */
+  
+  /* Core surfaces - Lifted slate gray, not pitch black */
+  --background: oklch(0.21 0.02 260);
+  --foreground: oklch(0.96 0.005 250);
+  
+  /* Cards - Elevated glass-like surfaces */
+  --card: oklch(0.26 0.022 260);
+  --card-foreground: oklch(0.96 0.005 250);
+  
+  /* Popovers - Slightly brighter for layering */
+  --popover: oklch(0.28 0.022 260);
+  --popover-foreground: oklch(0.96 0.005 250);
+  
+  /* Primary - Vibrant blue that pops */
+  --primary: oklch(0.68 0.19 250);
+  --primary-foreground: oklch(0.98 0 0);
+  
+  /* Secondary - Subtle elevated surfaces */
+  --secondary: oklch(0.32 0.025 260);
+  --secondary-foreground: oklch(0.92 0.005 250);
+  
+  /* Muted - For subtle backgrounds */
+  --muted: oklch(0.30 0.018 260);
+  --muted-foreground: oklch(0.70 0.01 250);
+  
+  /* Accent - Bright cyan/teal for highlights */
+  --accent: oklch(0.72 0.14 195);
+  --accent-foreground: oklch(0.18 0.02 195);
+  
+  /* Destructive */
+  --destructive: oklch(0.62 0.22 20);
+  --destructive-foreground: oklch(0.98 0 0);
+  
+  /* Borders - Visible but subtle, adds depth */
+  --border: oklch(0.38 0.025 260);
+  --input: oklch(0.32 0.022 260);
+  --ring: oklch(0.68 0.19 250);
+  
+  /* Charts - Harmonious blue palette */
+  --chart-1: oklch(0.68 0.19 250);
+  --chart-2: oklch(0.72 0.14 195);
+  --chart-3: oklch(0.78 0.12 250);
+  --chart-4: oklch(0.65 0.16 220);
+  --chart-5: oklch(0.58 0.18 270);
+  
+  /* Sidebar - Slightly darker for contrast */
+  --sidebar: oklch(0.19 0.018 260);
+  --sidebar-foreground: oklch(0.96 0.005 250);
+  --sidebar-primary: oklch(0.68 0.19 250);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.30 0.022 260);
+  --sidebar-accent-foreground: oklch(0.92 0.005 250);
+  --sidebar-border: oklch(0.35 0.022 260);
+  --sidebar-ring: oklch(0.68 0.19 250);
 }
 
-body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  font-feature-settings: 'rlig' 1, 'calt' 1;
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

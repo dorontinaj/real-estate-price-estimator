@@ -17,6 +17,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Calculator } from 'lucide-react';
 import { PredictionResults } from './components/PredictionResults';
+import { HelpSheet } from './components/help-sheet';
 
 let modelInstance: LinearRegressionModel | null = null;
 
@@ -127,40 +128,41 @@ export function EstimatorPage() {
     <div className='space-y-8'>
       <div className='text-center'>
         <div className='flex items-center justify-center gap-2 sm:gap-3 mb-4'>
-          <div className='p-2 sm:p-3 bg-blue-600 rounded-xl shadow-lg'>
-            <Calculator className='h-6 w-6 sm:h-8 sm:w-8 text-white' />
+          <div className='p-2 sm:p-3 bg-primary rounded-xl shadow-lg'>
+            <Calculator className='h-6 w-6 sm:h-8 sm:w-8 text-primary-foreground' />
           </div>
           <div className='text-left'>
-            <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-gray-900'>
+            <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-foreground'>
               Property Price Estimator
             </h1>
-            <p className='text-xs sm:text-sm text-gray-600'>
+            <p className='text-xs sm:text-sm text-muted-foreground'>
               ML-powered Belgian real estate valuation
             </p>
           </div>
+          <HelpSheet />
         </div>
         <div className='flex justify-center gap-2 flex-wrap'>
           <Badge
             variant='secondary'
-            className='bg-blue-50 text-blue-700 border-blue-200'
+            className='bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800'
           >
             Linear Regression
           </Badge>
           <Badge
             variant='secondary'
-            className='bg-green-50 text-green-700 border-green-200'
+            className='bg-green-50 text-green-700 border-green-200 dark:bg-green-950 dark:text-green-300 dark:border-green-800'
           >
             Decision Trees
           </Badge>
           <Badge
             variant='secondary'
-            className='bg-purple-50 text-purple-700 border-purple-200'
+            className='bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-950 dark:text-purple-300 dark:border-purple-800'
           >
             k-NN Algorithm
           </Badge>
           <Badge
             variant='secondary'
-            className='bg-orange-50 text-orange-700 border-orange-200'
+            className='bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950 dark:text-orange-300 dark:border-orange-800'
           >
             Real-time Prediction
           </Badge>
@@ -177,7 +179,7 @@ export function EstimatorPage() {
       </div>
 
       {predictions.length > 0 && (
-        <Card className='border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50'>
+        <Card className='border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5'>
           <CardHeader>
             <CardTitle className='text-lg'>
               💡 Understanding Your Estimate
@@ -188,25 +190,25 @@ export function EstimatorPage() {
           </CardHeader>
           <CardContent>
             <div className='grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 text-xs sm:text-sm'>
-              <div className='p-2 sm:p-3 bg-white rounded-lg shadow-sm'>
-                <div className='font-semibold text-gray-700'>
+              <div className='p-2 sm:p-3 bg-background rounded-lg shadow-sm dark:bg-card'>
+                <div className='font-semibold text-foreground'>
                   Location Impact
                 </div>
-                <div className='text-xs text-gray-600 mt-1'>35% weight</div>
+                <div className='text-xs text-muted-foreground mt-1'>35% weight</div>
               </div>
-              <div className='p-3 bg-white rounded-lg shadow-sm'>
-                <div className='font-semibold text-gray-700'>Surface Area</div>
-                <div className='text-xs text-gray-600 mt-1'>28% weight</div>
+              <div className='p-3 bg-background rounded-lg shadow-sm dark:bg-card'>
+                <div className='font-semibold text-foreground'>Surface Area</div>
+                <div className='text-xs text-muted-foreground mt-1'>28% weight</div>
               </div>
-              <div className='p-3 bg-white rounded-lg shadow-sm'>
-                <div className='font-semibold text-gray-700'>Property Type</div>
-                <div className='text-xs text-gray-600 mt-1'>15% weight</div>
+              <div className='p-3 bg-background rounded-lg shadow-sm dark:bg-card'>
+                <div className='font-semibold text-foreground'>Property Type</div>
+                <div className='text-xs text-muted-foreground mt-1'>15% weight</div>
               </div>
-              <div className='p-3 bg-white rounded-lg shadow-sm'>
-                <div className='font-semibold text-gray-700'>
+              <div className='p-3 bg-background rounded-lg shadow-sm dark:bg-card'>
+                <div className='font-semibold text-foreground'>
                   Construction Year
                 </div>
-                <div className='text-xs text-gray-600 mt-1'>12% weight</div>
+                <div className='text-xs text-muted-foreground mt-1'>12% weight</div>
               </div>
             </div>
           </CardContent>
