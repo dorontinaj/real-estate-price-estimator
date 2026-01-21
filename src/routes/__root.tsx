@@ -47,11 +47,33 @@ function RootLayout() {
       </main>
 
       <footer className='border-t bg-background/80 backdrop-blur-md mt-16 transition-colors duration-300'>
-        <div className='container mx-auto px-6 py-6'>
-          <p className='text-center text-sm text-muted-foreground'>
-            © 2025 AI Real Estate Estimator. Built with React 19, TanStack
-            Router & Query.
-          </p>
+        <div className='container mx-auto px-6 py-8'>
+          <div className='grid grid-cols-1 sm:grid-cols-3 gap-6 items-center'>
+            {/* Left: Brand (toned down) */}
+            <div className='flex items-center gap-3'>
+              <div className='flex-shrink-0 p-1 rounded-sm text-muted-foreground'>
+                <Home className='h-4 w-4' />
+              </div>
+              <div>
+                <div className='text-sm font-medium text-foreground'>AI Real Estate Estimator</div>
+                <div className='text-xs text-muted-foreground mt-0.5 hidden sm:block'>Belgian Property Intelligence</div>
+              </div>
+            </div>
+
+            {/* Center: Links (single centered row) */}
+            <nav aria-label='Footer navigation' className='flex flex-row flex-wrap justify-center gap-6 items-center col-span-1 sm:col-span-1'>
+              <Link to='/' className='text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-ring px-1 py-0.5 rounded whitespace-nowrap'>Estimator</Link>
+              <Link to='/neural-network' className='text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-ring px-1 py-0.5 rounded whitespace-nowrap'>Neural Net</Link>
+              <Link to='/algorithms' className='text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-ring px-1 py-0.5 rounded whitespace-nowrap'>Algorithms</Link>
+              <Link to='/insights' className='text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-ring px-1 py-0.5 rounded whitespace-nowrap'>Insights</Link>
+              <Link to='/methodology' className='text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-ring px-1 py-0.5 rounded whitespace-nowrap hidden sm:inline'>Methodology</Link>
+            </nav>
+
+            {/* Right: Social and small meta */}
+            <div className='flex flex-col sm:items-end items-center gap-3'>
+              <div className='text-xs text-muted-foreground'>© 2025 AI Real Estate Estimator</div>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
